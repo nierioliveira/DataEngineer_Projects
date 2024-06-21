@@ -32,14 +32,14 @@ dadosEmpresaB.renomeando_colunas(keymapping)
 
 fusao_dados = Dados.juntando_os_dados(dadosEmpresaA, dadosEmpresaB)
 #print('Fusao dos dados', fusao_dados)
-print('Fusao dos dados', fusao_dados.dados)
+#print('Fusao dos dados', fusao_dados.dados)
 print('Colunas Fusao dos dados:', fusao_dados.nome_colunas)
 print('Tamanho Fusao dos dados:', fusao_dados.tamanho_dados)
 
 
 #! LOAD
 dados_salvos = fusao_dados.salvar_dados(salvar_dados_processados)
-print(dados_salvos)
+print('Dados processados')
 
 
 

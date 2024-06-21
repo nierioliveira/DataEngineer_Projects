@@ -3,42 +3,42 @@ import csv
 
 class Dados():
     def __init__(self, path, tipo_dados):
-        self.path = path
-        self.tipo_dados = tipo_dados
-        self.dados = self.ler_todos_dados()
-        self.nome_colunas = self.get_columns()
-        self.tamanho_dados = self.size_dados()
+        self.__path = path
+        self.__tipo_dados = tipo_dados
+        self.dados = self.__ler_todos_dados()
+        self.nome_colunas = self.__get_columns()
+        self.tamanho_dados = self.__size_dados()
     
-    def ler_json(self):
-        with open(self.path, 'r') as file:
+    def __ler_json(self):
+        with open(self.__path, 'r') as file:
             base_json = json.load(file)
         return base_json
 
 
-    def ler_csv(self):
+    def __ler_csv(self):
         dados_csv = []
-        with open(self.path, 'r') as file:
+        with open(self.__path, 'r') as file:
             spamreader = csv.DictReader(file, delimiter=',')
             for dicionario_csv in spamreader:
                 dados_csv.append(dicionario_csv)
         return dados_csv
 
 
-    def ler_todos_dados(self):
+    def __ler_todos_dados(self):
         dados = []
-        if self.tipo_dados == 'csv':
-            dados = self.ler_csv()
+        if self.__tipo_dados == 'csv':
+            dados = self.__ler_csv()
 
-        elif self.tipo_dados == 'json':
-            dados = self.ler_json()
+        elif self.__tipo_dados == 'json':
+            dados = self.__ler_json()
         
-        elif self.tipo_dados == 'list':
-            dados = self.path
-            self.path = 'Lista em memória'
+        elif self.__tipo_dados == 'list':
+            dados = self.__path
+            self.__path = 'Lista em memória'
 
         return dados
     
-    def get_columns(self):
+    def __get_columns(self):
         return list(self.dados[-1].keys())
     
 
@@ -51,9 +51,9 @@ class Dados():
             novos_dados.append(dict_vazio)
 
         self.dados = novos_dados
-        self.nome_colunas = self.get_columns()
+        self.nome_colunas = self.__get_columns()
 
-    def size_dados(self):
+    def __size_dados(self):
         return len(self.dados)
     
     def juntando_os_dados(dadoA, dadoB):
@@ -63,7 +63,7 @@ class Dados():
 
         return Dados(todos_dados, 'list')
 
-    def gerando_tabela(self):
+    def __gerando_tabela(self):
         dados_gerados = [self.nome_colunas]
         for dados in self.dados:
             linha = []
@@ -74,7 +74,7 @@ class Dados():
     
     def salvar_dados(self, path):
 
-        dados_gerados = self.gerando_tabela()
+        dados_gerados = self.__gerando_tabela()
         with open(path, 'w') as file:
             writer = csv.writer(file)
             writer.writerows(dados_gerados)
